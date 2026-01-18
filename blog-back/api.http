@@ -1,0 +1,63 @@
+@baseUrl = http://localhost:5000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NmQxYzMxYTg5NmUyZDNiZGE1MTYyNiIsInVzZXJuYW1lIjoicmFtIiwiaWF0IjoxNzY4NzU4NTA3LCJleHAiOjE3Njg4NDQ5MDd9.jWdobbzEAji6PTVdzIMM2xVrpgFCGdPQJfZSEbaR-yc
+
+//Access user and profile
+
+### Register user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "ram",
+  "email": "ram@test.com",
+  "password": "ram@123"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "ram@test.com",
+  "password": "ram@123"
+}
+
+### Get my profile
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+
+### Create post
+POST {{baseUrl}}/posts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "My First Blog Post",
+  "content": "This is the content of my post",
+  "category": "64fabc1234567890abcd1234"
+}
+
+### Get my posts
+GET {{baseUrl}}/posts/me/myposts
+Authorization: Bearer {{token}}
+
+//Access public api
+
+### Get all categories
+GET {{baseUrl}}/categories
+
+### Get latest posts
+GET {{baseUrl}}/posts/latest
+
+### Get popular posts
+GET {{baseUrl}}/posts/popular
+
+### Get posts by category
+GET {{baseUrl}}/posts/category/64fabc1234567890abcd1234
+
+### View single post (auto increments views)
+GET {{baseUrl}}/posts/65abc1234567890abcd5678
+
+### View single post (auto increments views)
+GET {{baseUrl}}/posts/author/:696d1c31a896e2d3bda51626
+
