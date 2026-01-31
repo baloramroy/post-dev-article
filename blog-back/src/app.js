@@ -4,36 +4,37 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-//1st phase
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
-
-//2nd phase
 import postRoutes from './routes/post.routes.js';
 import categoryRoutes from './routes/category.routes.js';
+
 
 dotenv.config();
 
 
 const app = express();
-app.use(cors());
+
+
+// CORS configuration to allow cookies from frontend
+app.use(cors({
+origin: 'http://localhost:5173', // frontend origin
+credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 
 // Routes
-
-//1st phase
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-
-//2nd phase
 app.use('/api/posts', postRoutes);
 app.use('/api/categories', categoryRoutes);
 
 
 // DB Connection
-//1st phase
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error(err));

@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 router.get('/', getCategories); // public
-router.post('/', authMiddleware, adminMiddleware, createCategory); // admin only
+router.post('/', authMiddleware, createCategory); // admin only
 
 
 export default router;
